@@ -41,10 +41,6 @@ fun HalamanTiga(
             modifier = Modifier.padding(dimensionResource(R.dimen.padding_medium)),
             verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_small))
         ){
-            Text(text = orderUIState.nama)
-            Text(text = orderUIState.noTelp)
-            Text(text = orderUIState.alamat)
-
             items.forEach { item ->
                 Column {
                     Text(item.first.uppercase())
