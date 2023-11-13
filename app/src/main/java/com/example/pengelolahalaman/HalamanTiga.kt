@@ -27,6 +27,9 @@ fun HalamanTiga(
     orderUIState: OrderUIState
 ){
     val items = listOf(
+        Pair(stringResource(R.string.nama), orderUIState.nama),
+        Pair(stringResource(R.string.nomorhp), orderUIState.noTelp),
+        Pair(stringResource(R.string.alamat), orderUIState.alamat),
         Pair(stringResource(R.string.quantity), orderUIState.jumlah),
         Pair(stringResource(R.string.flavor),orderUIState.rasa)
     )
@@ -38,6 +41,10 @@ fun HalamanTiga(
             modifier = Modifier.padding(dimensionResource(R.dimen.padding_medium)),
             verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_small))
         ){
+            Text(text = orderUIState.nama)
+            Text(text = orderUIState.noTelp)
+            Text(text = orderUIState.alamat)
+
             items.forEach { item ->
                 Column {
                     Text(item.first.uppercase())
