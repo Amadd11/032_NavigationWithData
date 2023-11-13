@@ -15,13 +15,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -29,7 +30,7 @@ fun HalamanSatu(
     onSubmitButtonClicked : (MutableList<String>) -> Unit,
     onCancelButtonClicked : () -> Unit
 ){
-    var nama by rememberSaveable { mutableStateOf(value = "") }
+    var nama by remember { mutableStateOf(value = "") }
     var noHp by remember { mutableStateOf(value = "") }
     var alamat by remember { mutableStateOf(value = "") }
     var listData: MutableList<String> = mutableListOf(nama, noHp, alamat)
@@ -39,32 +40,48 @@ fun HalamanSatu(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxSize()) {
+        Text(text = "Data Pelanggan",
+            textAlign = TextAlign.Center,
+            fontSize = 20.sp)
+        Spacer(modifier = Modifier.padding(10.dp))
         OutlinedTextField(
             value = nama,
             onValueChange = {nama = it},
-            label = { Text(text = "Nama") })
+            label = { Text(text = "Nama")},
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(15.dp))
         OutlinedTextField(
             value = noHp,
             onValueChange = {noHp = it},
-            label = { Text(text = "No Hp") })
+            label = { Text(text = "No Hp")},
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(15.dp))
         OutlinedTextField(
             value = alamat,
             onValueChange = {alamat = it},
-            label = { Text(text = "Alamat") })
-        Spacer(modifier = Modifier.padding(16.dp))
+            label = { Text(text = "Alamat")},
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(15.dp))
+        Spacer(modifier = Modifier.padding(2.dp))
 
         Row(modifier = Modifier
-            .fillMaxWidth()
             .padding(dimensionResource(R.dimen.padding_medium))
             .weight(1f, false),
             horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_medium)),
             verticalAlignment = Alignment.Bottom){
             
-            OutlinedButton( modifier = Modifier.weight(1f),
+            OutlinedButton(
+                modifier = Modifier,
                 onClick = onCancelButtonClicked) {
                 Text(text = stringResource(id = R.string.cancel))
             }
-            OutlinedButton (onClick = { onSubmitButtonClicked(listData) }) {
+            Spacer(modifier = Modifier.padding(16.dp))
+            OutlinedButton (
+                modifier = Modifier,
+                onClick = { onSubmitButtonClicked(listData) }) {
                 Text(text = stringResource(id = R.string.btn_submit))
             }
         }
