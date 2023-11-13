@@ -26,6 +26,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.pengelolahalaman.data.SumberData.flavors
 
 enum class PengelolaHalaman {
+    Formulir,
     Home,
     Rasa,
     Summary
@@ -70,9 +71,15 @@ fun EsJumboApp(
             composable(route = PengelolaHalaman.Home.name) {
                 HalamanHome(
                     onNextButtonClicked = {
-                    navController.navigate(PengelolaHalaman.Rasa.name)
+                    navController.navigate(PengelolaHalaman.Formulir.name)
                 }
                 )
+            }
+            composable(PengelolaHalaman.Formulir.name){
+                HalamanSatu(onSubmitButtonClicked = {
+                    viewModel.setContact(it)
+                    navController.navigate(PengelolaHalaman.Rasa.name)
+                })
             }
             composable(route = PengelolaHalaman.Rasa.name) {
                 val context = LocalContext.current
